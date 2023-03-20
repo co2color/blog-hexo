@@ -4,10 +4,14 @@ title: Hello World
 Welcome to [Hexo](https://hexo.io/)! This is your very first post. Check [documentation](https://hexo.io/docs/) for more info. If you get any problems when using Hexo, you can find the answer in [troubleshooting](https://hexo.io/docs/troubleshooting.html) or you can ask me on [GitHub](https://github.com/hexojs/hexo/issues).
 
 ## Quick Start
+``` js
+const a = 1
+function test() {
+console.log(a)
+}
 
 ### Create a new post
-
-``` bash
+``` js
 $ hexo new "My New Post"
 ```
 

@@ -73,4 +73,12 @@ export function setCurrentInstance(instance) {
 ```
 ## asdasd2
 
+<<<<<<< HEAD
 ### haha3
+=======
+
+
+``` javascript
+const b = 2
+```
+>>>>>>> 205b89ccca394fb91f7494ff76a802e74556ac2c
