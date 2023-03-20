@@ -1,2 +1,2 @@
 # blog-hexo
-my blog by hexo
+my blog by hexo.
