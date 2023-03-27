@@ -1,11 +1,11 @@
 ---
 title: 最小编译器之tokenizer和parser
-excerpt: super-tiny-compiler(一)
+excerpt: super-tiny-compiler(上)
 date: 2023-3-21 22:40:02
 tags: js
 categories: 前端
 ---
-本项目是[the-super-tiny-compiler](https://github.com/jamiebuilds/the-super-tiny-compiler)的typescript实现。
+> 本项目是[the-super-tiny-compiler](https://github.com/jamiebuilds/the-super-tiny-compiler)的typescript实现(上半部分)
 
 直接步入正题吧。
 现在有如下代码：
