@@ -9,14 +9,14 @@ categories: 前端
 
 直接步入正题吧。
 现在有如下代码：
-```
+```js
 const code = `(add 2 (subtract 4 2))`
 ```
-我们需要将这个字符串解析，转为parser[]数组。parser数组每个item的格式Tolen的类型：
-```
+我们需要将这个字符串解析，转为parser[]数组。parser数组每个item的Token的类型：
+```js
 export enum TokenTypes {
-  Paren,
-  Name,
+  Paren, // 左右括号
+  Name, // 操作符，如add subtract
   Number,
   String,
 }
@@ -25,8 +25,8 @@ export interface Token {
   value: string;
 }
 ```
-遇到左右括号、操作符（加减乘除等）、数字时，就应该把该项push进数组。所以code这段字符串中，除去空格忽略不计，转为的parser数组长度应该为9。先不看实现过程，我们可以通过肉眼看出，该code的转换结果应该为：
-```
+遇到左右括号、操作符（加减乘除等）、数字时，就应该把该项push进数组。所以在code这段字符串中，除去空格忽略不计，转为的parser数组长度应该为9。先不看实现过程，我们可以通过肉眼看出，该code的转换结果应该为：
+```js
 const tokens = [
   { type: TokenTypes.Paren, value: "(" },
   { type: TokenTypes.Name, value: "add" },
@@ -40,7 +40,7 @@ const tokens = [
 ];
 ```
 所以我们可以写好测试逻辑，这里用vitest：
-```
+```js
 import { test, expect } from 'vitest'
 import { tokenizer, TokenTypes } from './tokenizer'
 
@@ -67,7 +67,7 @@ test('tokenizer', () => {
 - 遇到左右括号，创建一个Token类型的对象，把对象push到数组里，指针+1，continue；
 - 遇到字符串或者数字，再来一个while循环（字符串/数字各种独立实现）或者其实你可以有自己的实现方式，目的就是拿到这一段字符串/数字，比如code字符串中的"add"字符串，遇到a字符的时候就while，然后遇到d继续，add后面是一个空格"add ("，所以遇到非字符串的时候，就结束该while循环。
 那么我们就来实现它吧：
-```
+```js
 export function tokenizer(code: string) {
   const tokens: Token[] = [];
   let current = 0;
@@ -129,7 +129,14 @@ export function tokenizer(code: string) {
 
 **接下来我们需要将tokens数组解析(parser)成ast树。**
 所以这里需要实现一个parser函数。话不多说，代码并不复杂，先给出实现，再讲讲：
-```
+```js
+function createRootNode(): RootNode {
+  return {
+    type: NodeTypes.Program,
+    body: [],
+  }
+}
+
 export function parser(tokens: Token[]) {
   const root = createRootNode();
 
@@ -185,7 +192,7 @@ export function parser(tokens: Token[]) {
 ```
 其实如果你的递归水平不错， 就不需要看下面的分析了，直接看上面代码就行了，下面的内容就是讲述这个递归思路的。
 对于这个测试用例tokens:
-```
+```js
 const tokens = [
   { type: TokenTypes.Paren, value: '(' },
   { type: TokenTypes.Name, value: 'add' },
@@ -208,9 +215,9 @@ walk2中，会创建一个新的createCallExpressionNode('subtract')，我们叫
 SubtractNode的params会push一个NumberNode('4')和一个NumberNode('2')
 所以walk2就返回SubtractNode(NumberNode(4),NumberNode(2))，把结果push到AddNode.params里面
 因此walk1就返回AddNode(NumberNode(2),SubtractNode(NumberNode(4),NumberNode(2)))，然后walk1就结束了
-用表达式就是：( 2 + ( 4 - 2 ) )
+表达式即：**( 2 + ( 4 - 2 ) )**
 然后解释一下最下面的while（可参考test中的'two callExpression'）:
-```
+```js
 while (current < tokens.length) {
   const outWalkNode = walk()
   rootNode.body.push(outWalkNode)
@@ -218,4 +225,4 @@ while (current < tokens.length) {
 ```
 这段代码是为了处理多个表达式的情况，比如：
 ( ( 2 + 4 ) (3 + 5 ) )
-如果遇到了，就重复上面的过程，把结果push到rootNode.body里面，最后返回rootNode.
+如果遇到了，就重复上面的过程，把结果push到rootNode.body里面，最后返回rootNode。
