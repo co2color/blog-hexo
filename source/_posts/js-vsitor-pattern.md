@@ -1,7 +1,7 @@
 ---
 title: 设计模式之访问者模式
 excerpt: Visitor Pattern
-date: 2023-3-24 23:38:35
+date: 2023-3-25 23:38:35
 tags: js
 categories: 设计模式
 ---
