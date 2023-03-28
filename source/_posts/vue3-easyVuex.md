@@ -1,6 +1,6 @@
 ---
-title: vue3代替vuex的简单方案
-excerpt: 当然，你直接使用pinia也ok
+title: easy vue3 hooks
+excerpt: useHooks like react
 date: 2022-4-2 19:32:10
 tags: js
 categories: 前端

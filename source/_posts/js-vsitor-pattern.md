@@ -1,6 +1,6 @@
 ---
 title: 设计模式之访问者模式
-excerpt: JavaScript Visitor Pattern
+excerpt: Visitor Pattern
 date: 2023-3-24 23:38:35
 tags: js
 categories: 设计模式
