@@ -151,63 +151,61 @@ function traverser(rootNode: RootNode, visitor: Visitor) {
 接下来是转换器（Transformer）的部分。我们的转换器接受上面的原始 ast 树，结合访问者，return 一个新的 AST：
 
 ```js
-function transformer(node: RootNode) {
-  const visitor = {
-    NumberLiteral: {
-      enter(node: any) {
-        return {
-          type: 'NumberLiteral',
-          value: node.value,
-        }
-      },
-    },
-    StringLiteral: {
-      enter(node: any) {
-        return {
-          type: 'StringLiteral',
-          value: node.value,
-        }
-      },
-    },
-    CallExpression: {
-      enter(node: any) {
-        return {
-          type: 'CallExpression',
-          callee: {
-            type: 'Identifier',
-            name: node.name,
-          },
-          arguments: node.params.map((param: any) => {
-            return visitor[param.type].enter(param)
-          }),
-        }
-      },
-    },
-    Program: {
-      enter(node: any) {
-        return {
-          type: 'Program',
-          body: node.body.map((bodyNode: any) => {
-            return visitor[bodyNode.type].enter(bodyNode)
-          }),
-        }
-      },
-    },
+import { traverser } from './traverser'
+export function transformer(ast: RootNode) {
+  const newAst = {
+    type: NodeTypes.Program,
+    body: [],
   }
-  return visitor[node.type].enter(node)
+
+  ast.context = newAst.body
+
+  traverser(ast, {
+    CallExpression: {
+      enter(node, parent) {
+        if (node.type === NodeTypes.CallExpression) {
+          let expression: any = {
+            type: 'CallExpression',
+            callee: {
+              type: 'Identifier',
+              name: node.name,
+            },
+            arguments: [],
+          }
+
+          node.context = expression.arguments
+
+          if (parent?.type !== NodeTypes.CallExpression) {
+            expression = {
+              type: 'ExpressionStatement',
+              expression,
+            }
+          }
+
+          parent?.context?.push(expression)
+        }
+      },
+    },
+
+    NumberLiteral: {
+      enter(node, parent) {
+        if (node.type === NodeTypes.NumberLiteral) {
+          const numberNode: any = {
+            type: 'NumberLiteral',
+            value: node.value,
+          }
+
+          parent?.context?.push(numberNode)
+        }
+      },
+    },
+  })
+
+  return newAst
 }
+
 ```
-
-执行函数：
-
-- 首先定义了一个 visitor 对象，其中包含了针对不同 AST 节点类型的处理函数。对于每一种节点类型，都有一个 enter 函数，用来处理该节点类型下的具体节点。
-- 在 Program 节点下执行 enter 函数。Program 节点表示整个程序，其 body 属性是一个包含所有语句的数组。在这个 enter 函数中，遍历 body 数组，对于每个语句节点，执行对应的 enter 函数并返回处理后的结果。
-- 在 CallExpression 节点下执行 enter 函数。CallExpression 节点表示函数调用表达式，其 name 属性表示函数名，params 属性表示函数参数。在这个 enter 函数中，先处理 params 数组中的每个参数节点，递归调用对应节点类型的 enter 函数，并将处理后的结果存入 arguments 数组中。然后创建一个新的对象，表示转换后的函数调用表达式，并将处理后的 callee 和 arguments 属性存入该对象中。
-- 在 NumberLiteral 节点下执行 enter 函数。NumberLiteral 节点表示数字字面量，其 value 属性表示该数字的值。在这个 enter 函数中，创建一个新的对象，表示转换后的数字字面量，并将 value 属性存入该对象中。
-- 在 StringLiteral 节点下执行 enter 函数。StringLiteral 节点表示字符串字面量，其 value 属性表示该字符串的值。在这个 enter 函数中，创建一个新的对象，表示转换后的字符串字面量，并将 value 属性存入该对象中。
-- 最后返回处理后的根节点，也就是我们最终需要的新的 ast。
-
-总结一下，这个函数其实就是对 CallExpression 节点类型进行了转换，将其变为了一个更复杂的表达式，包含了 callee 和 arguments 两个子节点。原始 AST 中的 CallExpression 节点只包含了一个 name 属性和一个 params 数组，而在新 AST 中，CallExpression 节点包含了一个 callee 属性和一个 arguments 数组，其中 callee 属性是一个 Identifier 节点，代表了函数名，arguments 数组中包含了对参数进行进一步处理后得到的新的 AST 节点。除此之外，还有一些细节上的变化，例如 AST 中的节点类型名称有所不同等。
+这个函数其实就是对 CallExpression 节点类型进行了转换，将其变为了一个更复杂的表达式，包含了 callee 和 arguments 两个子节点。原始 AST 中的 CallExpression 节点只包含了一个 name 属性和一个 params 数组，而在新 AST 中，CallExpression 节点包含了一个 callee 属性和一个 arguments 数组，其中 callee 属性是一个 Identifier 节点，代表了函数名，arguments 数组中包含了对参数进行进一步处理后得到的新的 AST 节点。除此之外，还有一些细节上的变化，例如 AST 中的节点类型名称有所不同等。
 
 你可能会疑惑，为什么当初不直接转成这个 ast，为何要多此一举？
 我的个人理解是，生成原始 AST 的过程是通过解析输入的代码字符串得到的，而转换过程则是通过对 AST 节点类型进行遍历，对每一种类型进行相应的处理，得到新的 AST。**这种分离的设计方式，使得编译器的各个部分可以更加独立地进行开发和测试，同时也方便了对编译器进行扩展和修改。**
@@ -361,3 +359,6 @@ const result = `add(2, subtract(4, 2))`
 ```
 
 最终，我们实现了将`(add 2 (subtract 4 2))`转换为`add(2, subtract(4, 2))`的过程。
+
+### 源码
+[https://github.com/co2color/super-tiny-compiler](https://github.com/co2color/super-tiny-compiler)
