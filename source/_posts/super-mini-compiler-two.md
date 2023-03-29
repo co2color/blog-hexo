@@ -205,6 +205,13 @@ export function transformer(ast: RootNode) {
 }
 
 ```
+解析：
+首先，创建一个空的新AST对象，类型为Program，body属性为空数组。
+接着，给原AST对象添加一个context属性，值为新AST的body属性，用于在遍历原AST时记录当前节点应该被添加到哪个父节点的context中。
+然后，使用traverser函数遍历原AST，对于每个CallExpression节点，创建一个新的expression对象，类型为CallExpression，callee属性为一个Identifier对象，name属性为节点的name属性，arguments属性为空数组。接着，将expression对象的context属性设置为节点的arguments属性，用于在遍历CallExpression的子节点时记录当前节点应该被添加到哪个父节点的context中。如果当前节点的父节点不是CallExpression，将expression对象包装在一个ExpressionStatement对象中。最后，将expression对象添加到父节点的context中。
+对于每个NumberLiteral节点，创建一个新的numberNode对象，类型为NumberLiteral，value属性为节点的value属性。将numberNode对象添加到父节点的context中。
+最后，返回新的AST对象。
+
 这个函数其实就是对 CallExpression 节点类型进行了转换，将其变为了一个更复杂的表达式，包含了 callee 和 arguments 两个子节点。原始 AST 中的 CallExpression 节点只包含了一个 name 属性和一个 params 数组，而在新 AST 中，CallExpression 节点包含了一个 callee 属性和一个 arguments 数组，其中 callee 属性是一个 Identifier 节点，代表了函数名，arguments 数组中包含了对参数进行进一步处理后得到的新的 AST 节点。除此之外，还有一些细节上的变化，例如 AST 中的节点类型名称有所不同等。
 
 你可能会疑惑，为什么当初不直接转成这个 ast，为何要多此一举？
