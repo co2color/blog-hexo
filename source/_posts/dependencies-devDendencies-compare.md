@@ -2,8 +2,8 @@
 title: dependencies和devDendencies的区别
 excerpt: package.json
 date: 2022-7-22 02:50:07
-tags: js
-categories: 前端
+tags: 综合
+categories: 综合
 ---
 package.json门前有两座山，一个是dependencies，另一个(也)是devDendencies。
 

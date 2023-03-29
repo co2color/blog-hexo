@@ -2,8 +2,8 @@
 title: github-pr-step
 excerpt: ~~
 date: 2021-12-11 19:54:42
-tags: js
-categories: 前端
+tags: 综合
+categories: 综合
 ---
 阅读vue3文档时发现了文字重复的小问题，因此想提交pr。
 本文假设你的github username为grace,提交pr地址：[https://github.com/vuejs-translations/docs-zh-cn](https://github.com/vuejs-translations/docs-zh-cn)

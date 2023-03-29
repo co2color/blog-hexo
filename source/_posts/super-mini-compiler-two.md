@@ -3,7 +3,7 @@ title: 最小编译器之traverser、transformer和codegen
 excerpt: super-tiny-compiler(下)
 date: 2023-3-29 01:08:16
 tags: js
-categories: 前端
+categories: 综合
 ---
 
 > 本项目是[the-super-tiny-compiler](https://github.com/jamiebuilds/the-super-tiny-compiler)的 typescript 实现(下半部分)
