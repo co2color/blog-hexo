@@ -5,7 +5,7 @@ date: 2022-6-16 22:34:35
 tags: js
 categories: 前端
 ---
-[手写系列一](https://co2color.github.io/#/detail/67)实现了一个基础版的Promise：
+[手写系列一](https://co2color.netlify.app/2022/01/14/easy-async-promise/)实现了一个基础版的Promise：
 ``` js
 const ps = new Pms((resolve, reject) => {
   setTimeout(() => {
