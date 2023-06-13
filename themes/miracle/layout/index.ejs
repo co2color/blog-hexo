@@ -37,7 +37,7 @@
           <div class="index-btm post-metas">
             <% if(theme.index.post_meta.date ) { %>
               
-                <time datetime="<%= full_date(post.date, 'YYYY-MM-DD HH:mm') %>" pubdate>
+                <time datetime="<%= full_date(post.date, 'YYYY-MM-DD HH:mm:ss') %>" pubdate>
                   <%- date(post.date, config.date_format) %>
                 </time>
               
