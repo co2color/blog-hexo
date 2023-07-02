@@ -9,7 +9,7 @@ categories: 综合
 > 这篇不知道会不会有什么风险，所以如果不懂标题是什么东西的人，还是别看了.....
 
 你需要的东西
-1. (clash)[https://github.com/Dreamacro/clash]
+1. [clash](https://github.com/Dreamacro/clash)
 2. 一个vp埃斯和一个属于你的域名；
 
 ssl连接服务器后，输入脚本：
@@ -29,7 +29,7 @@ trojan；
 选择trojan后，继续按照cmd的信息往下走，输入你的域名和一个密码，回车，等待一段时间即可；
 
 
-然后下载clash的(模板配置文件)[https://vpsgongyi.com/clash_template2.yaml],找到trogan相关的配置项，输入配置(你自己设置的配置，比如port不一定非要是443，取决于你自己设置的是什么)：
+然后下载clash的[模板配置文件](https://vpsgongyi.com/clash_template2.yaml),找到trogan相关的配置项，输入配置(你自己设置的配置，比如port不一定非要是443，取决于你自己设置的是什么)：
 ``` yaml
 # Trojan
 - name: "trojan"
