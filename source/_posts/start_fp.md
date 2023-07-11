@@ -1,5 +1,5 @@
 ---
-title: 初识Functional Programming
+title: 谈谈Functional Programming
 excerpt: fp by js
 date: 2023-07-03 02:05:41
 tags: 综合
