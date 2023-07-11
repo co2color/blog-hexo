@@ -180,11 +180,11 @@ navbar:
     # 导航栏菜单，可自行增减.
     # Navigation bar menu.
     menu:
-        首页: /
-        归档: /archives/
-        分类: /categories/
-        标签: /tags/
-        # 说说: /talk/
+        Home: /
+        Archives: /archives/
+        Categories: /categories/
+        Tags: /tags/
+        Github: https://github.com/co2color
         # 友链: /links/
         # 关于: /about/
         # ...
@@ -447,7 +447,7 @@ category:
 # Archive Page
 #---------------------------
 archive:
-    title: 归档
+    title: Archives
 
 #---------------------------
 # 标签页
