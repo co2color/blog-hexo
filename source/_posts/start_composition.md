@@ -1,5 +1,5 @@
 ---
-title: 什么叫组合优于继承
+title: 什么叫「组合优于继承」?
 excerpt: 组合vs继承 by js
 date: 2023-07-19 23:38:16
 tags: 综合
