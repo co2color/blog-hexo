@@ -1,5 +1,5 @@
 ---
-title: Functional Programming之js中的闭包
+title: 从Functional Programming的角度谈JavaScript中的闭包
 excerpt: fp/closure/javascript
 date: 2023-07-03 02:05:41
 tags: 综合
