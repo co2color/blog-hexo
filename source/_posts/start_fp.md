@@ -66,7 +66,7 @@ const sum = add(1)
 sum(2) // output 3
 ```
 看这段代码，sum其实属于add的某种“副本”，实现上需要有一块存储区域来**记**“sum中的a = 1”这个状态，**这个状态对外不可见，所以叫它闭包(Closure)。**
-再通俗一点来说就是，因为sum要记住自己定义的时候 a的值为1，所以实现时，**b => a + b和a = 1**会捆绑在一起，这样的组合就是闭包。
+再通俗一点来说就是，因为sum要记住自己定义的时候 a的值为1，所以实现时，**b => a + b和a = 1**会捆绑在一起，**这样的组合就是闭包。**
 下面是一个fp中的闭包实际用例：
 ``` js
 function memoize(arg) {
@@ -80,4 +80,7 @@ const memoized = memoize('hello')
 memoized('world') // {world: 'hello--world'}
 memoized('cococolor') // {world: 'hello--world', cococolor: 'hello--cococolor'}
 ```
-memoized始终记住了memoize中的arg = hello 这个状态，memoized函数和arg捆绑在了一起，他们的组合就是闭包。
+在这个例子中，闭包允许我们创建一个缓存对象 cache，并在不暴露给外部的情况下，**持久地保存其状态。**由于闭包的存在，每次调用memoize函数时，**都会创建一个独立的cache对象，并将其保存在闭包中**。每次调用memoized函数时，都会更新cache对象，并保留之前的结果。
+
+所以，可以说memoized函数和arg是捆绑在一起的，每个memoized函数实例都与一个特定的arg值相关联。而memoized函数和cache也是捆绑在一起的，每个memoized函数实例都有自己的独立的cache对象。
+这种捆绑关系使得每个memoized函数实例都具有自己的状态，并且可以在闭包中持久地保存和访问这些状态，而这种状态对外是不可见的，是保存在memoized函数内部的，所以用“闭”和“包”这俩字 《闭包》来称呼，倒也是蛮形象的。
