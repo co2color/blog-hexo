@@ -41,11 +41,9 @@ getUser(123)
 ``` js
 function httpClientFactory(baseUrl) {
   return {
-    baseUrl: baseUrl,
-    getUser: (id) => {
-      return axios.get(`${baseUrl}/users/${id}`)
-    }
-  }
+    baseUrl,
+    getUser: (id) => axios.get(`${baseUrl}/users/${id}`),
+  };
 }
 const httpClient = httpClientFactory('host/api')
 const getUser = httpClient.getUser
