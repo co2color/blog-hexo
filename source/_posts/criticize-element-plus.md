@@ -25,4 +25,21 @@ vue2 时代，我的主力 ui 框架就是 elementUI，而步入新公司后，�
 </template>
 ```
 
-为什么这么说呢？*太冗余了。*就像 vue3 非要提供 ref 和 reactive 两个 api 一样多余，
+为什么这么说呢？*太冗余了。*设计者是想把其作为一个便捷功能植入 button 里，但实际上真的不应该面面俱到，就像 vue 被批 api 太多，不像在写 js 一样，我认为 icon 这种 prop 不应该存在，你可以提供一个#icon 的 slot 来处理，或者用户其实能在 content 里自行处理。你加个 icon 的 prop，还只能用你自己的 icons 组件，无形之中又加了一层心智负担。
+
+- el-radio 和 el-select:
+  这俩组件十分让人迷惑困扰和厌恶。
+  以下是 el-radio 的使用方式：
+
+```html
+<script setup lang="ts">
+  import { ref } from 'vue'
+  const radio = ref('1')
+</script>
+<template>
+  <el-radio-group v-model="radio">
+    <el-radio label="1">Option 1</el-radio>
+    <el-radio label="2">Option 2</el-radio>
+  </el-radio-group>
+</template>
+```
