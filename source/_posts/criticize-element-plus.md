@@ -34,12 +34,61 @@ vue2 时代，我的主力 ui 框架就是 elementUI，而步入新公司后，�
 ```html
 <script setup lang="ts">
   import { ref } from 'vue'
-  const radio = ref('1')
+  const radio = ref(true)
 </script>
 <template>
   <el-radio-group v-model="radio">
-    <el-radio label="1">Option 1</el-radio>
-    <el-radio label="2">Option 2</el-radio>
+    <el-radio :label="true">是</el-radio>
+    <el-radio :label="false">否</el-radio>
   </el-radio-group>
+</template>
+```
+
+作为一个前端，一个很明显的事实是：如果要把该字段传给后端，100%是传一个 boolean 类型，而这个组件想设置该值的 prop 却叫做 label...
+如果是我，我会这样设置：
+
+```html
+<my-radio-group v-model="radio">
+  <my-radio :value="true" label="是" />
+  <my-radio :value="false" label="否" />
+</my-radio-group>
+```
+
+或者：
+
+```html
+<my-radio-group v-model="radio">
+  <my-radio :value="true">是</my-radio>
+  <my-radio :value="false">否</my-radio>
+</my-radio-group>
+```
+
+这样明显更直观。
+
+而 el-select 组件就是这样的：
+
+```html
+<el-select v-model="value">
+  <el-option
+    v-for="item in options"
+    :key="item.value"
+    :label="item.label"
+    :value="item.value"
+  />
+</el-select>
+```
+
+这样就没有心智负担了，value 代表值，label 则是显示给用户看的内容。
+而 arco 的 radio 则清爽很多：
+
+```html
+<script>
+  const options = [
+    { label: '是', value: true },
+    { label: '否', value: false },
+  ]
+</script>
+<template>
+  <a-radio-group v-model="value" :options="options" />
 </template>
 ```
