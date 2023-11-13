@@ -92,3 +92,34 @@ vue2 时代，我的主力 ui 框架就是 elementUI，而步入新公司后，�
   <a-radio-group v-model="value" :options="options" />
 </template>
 ```
+
+- transfer
+  穿梭框组件也是同样的问题，element 的用法是：
+
+```html
+<script setup>
+  import { ref } from 'vue'
+
+  const generateData = () => {
+    const data: Option[] = []
+    for (let i = 1; i <= 15; i++) {
+      data.push({
+        key: i,
+        label: `Option ${i}`,
+      })
+    }
+    return data
+  }
+
+  const data = ref(generateData())
+  const value = ref([])
+</script>
+
+<template>
+  <el-transfer v-model="value" :data="data" />
+</template>
+```
+
+这里使用 key 其实没有太多问题，但作为一个同时间使用 transfer、select、radio 组件的人，一会儿 key，一会儿 value，一会儿 label，心智负担实在是太重了....
+
+ps：关于 radio 使用 label 作为值这个事，近期(2023.10 月)element-plus core team 的人说：“收到建议哈，label 和 value 不统一确实会造成使用割裂，也确实是历史包袱的原因。当前大版本应该是不会做出改动了，如果有下个大版本，会优先修改这个问题。”
