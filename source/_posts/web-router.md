@@ -1,7 +1,7 @@
 ---
 title: 实现一个Web Router
 excerpt: hash/history模式的router切换
-date: 2023-4-17 23:45:45
+date: 2023-11-13 22:46:29
 tags: js
 categories: 前端
 ---
@@ -162,8 +162,9 @@ export const ROUTELIST = [
 ]
 ```
 
-然后在index.js中init：
-``` js
+然后在 index.js 中 init：
+
+```js
 import { HashRouter } from './hash'
 import { HistoryRouter } from './history'
 import { ROUTELIST } from './routeList'
@@ -201,6 +202,6 @@ document.querySelector('.btn-list').addEventListener('click', (e) => {
 document.querySelector('.replace-btn').addEventListener('click', (e) => {
   webRouter.replace('/')
 })
-
 ```
+
 大功告成~
