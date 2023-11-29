@@ -1,7 +1,7 @@
 ---
 title: How to ask question
 excerpt: 吐槽孬问题
-date: 2023-11-29 23:12:43
+date: 2023-11-29 23:12:44
 tags: 综合
 categories: 综合
 ---
