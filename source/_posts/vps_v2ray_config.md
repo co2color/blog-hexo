@@ -47,3 +47,8 @@ trojan；
 然后保存配置文件即可。
 
 然后就是去clash，找到profiles-import-导入该文件，选择该config，然后就可以用了~
+
+另附trojan的脚本：
+``` sh
+bash <(curl -sL https://raw.githubusercontent.com/daveleung/hijkpw-scripts-mod/main/trojan_mod1.sh)
+```
