@@ -125,7 +125,7 @@ if (children) {
 
 现在这段代码就变成了：如果存在 children，那么：如果当前节点是数组节点，就返回 children[0];如果是个 slot，就返回该 slot 的结果。
 
-我们可以看看(该 pr 对应的 issue)[https://github.com/vuejs/core/issues/10771] ，报错都是因为 Cannot read property '0' of null，就是因为下标问题。
+我们可以看看(该 pr 对应的 issue)[https://github.com/vuejs/core/issues/10771] ，报错都是因为 Cannot read property '0' of null，就是因为下标问题。（生产环境才有，dev 不会）
 
 所以你可以尝试着这样做：1 .找到一个 pr，去看对应的 issue，复现步骤，然后再去研究该 pr 为什么要这样改。
 
