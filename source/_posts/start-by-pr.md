@@ -8,7 +8,7 @@ categories: 综合
 
 > 这是该系列第一期~
 
-### 主题：vue3 v3.4.24 使用 keep-alive 导致的 bug
+### 主题：vue3 v3.4.24 在 transition 中使用 keep-alive 导致的 bug
 
 复现代码：
 
