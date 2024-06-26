@@ -57,7 +57,7 @@ function getKeepAliveChild(vnode: VNode): VNode | undefined {
 
 这里有几个需要解释的：
 
-1. vnode：vue3 的虚拟节点，相当于用 js 描述一个真实的 dom，比如一个 p 标签，其 className 是 p-name，并且该标签有一个点击函数 onclick，那么如果想渲染这个函数，我们就可以传如下参数,第一个参数是 dom 的类型，p、div 等；第二个参数存储标签的信息:
+1. vnode：vue3 的虚拟节点，相当于用 js 描述一个真实的 dom，比如一个 DIV 标签，其 className 是 red，id 是 root，并且该标签有一个点击函数 onClick，如果想渲染这个函数，我们就可以传如下参数,第一个参数是 dom 的类型，p、div 等；第二个参数存储标签的信息:
 
 ```js
 function func() {}
@@ -70,7 +70,7 @@ h("div", {
 ```
 
 2. ShapeFlags
-   ShapeFlags 定义在 packages/shared/src/shapeFlags.ts 中，主要是为了用位运算做性能优化。每一个 vnode 肯定都有一个类型，而使用位运算来判断节点类型，性能比 a===b 更快。
+   ShapeFlags 定义在 packages/shared/src/shapeFlags.ts 中，主要是为了用位运算做性能优化。每一个 vnode 都有一个节点类型，而使用位运算来判断节点类型，性能比 a===b 更快。
    创建一个 vnode 参考：packages/runtime-core/src/vnode.ts，createBaseVNode 函数会对 shapeFlag 进行赋值：
 
 ```js
@@ -90,7 +90,7 @@ if (needFullChildrenNormalization) {
 }
 ```
 
-因此如果你不懂什么是位运算，只需要知道这个 if 就是为了判断节点类型，在该 if 中，是为了判断当前节点是否是数组类型。
+因此如果你不懂什么是位运算也没关系，只需要知道这个 if 就是为了判断节点类型而存在。在该 if 中，是为了判断当前节点是否是数组类型。
 
 #### 现在回到 getKeepAliveChild 函数中：
 
