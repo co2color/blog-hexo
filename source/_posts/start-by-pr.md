@@ -105,7 +105,7 @@ if (shapeFlag & ShapeFlags.ARRAY_CHILDREN) {
 ```
 
 这段代码判断的是该 vnode 的类型，return 的是 vnode.children[0]。如果 vnode.children 长度为 0 ，就会报错。
-因此就需要加上 children.length 的判断逻辑：
+因此就需要加上 children 的判断逻辑：
 
 ```js
 if (children) {
