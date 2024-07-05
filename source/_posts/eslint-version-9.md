@@ -6,7 +6,7 @@ tags: 综合
 categories: 前端
 ---
 
-首先说几个点：
+首先说2个点：
 
 - eslint9 弃用 eslintrc 文件，使用 eslint.config.(m/c)js 替代;
 
@@ -33,7 +33,7 @@ categories: 前端
 export default [];
 ```
 
-可以看出，v9 变成了数组，相当于 flat 管理了。因此如果是 monorepo，有几个子项目就可以在这里配置几个对象，根据 files 规则去匹配对应的项目用，这个查文档即可，不多废话。
+可以看出，v9.x 导出了一个数组，因此如果是 monorepo，有几个子项目就可以在这里配置几个对象，根据 files 规则去匹配对应的项目用，这个查文档即可，不多废话（这是其中一个原因，不代表多个obj只能是多个项目）
 
 首先，不考虑 ts 项目的情况下，最简单的配置：
 
@@ -47,7 +47,27 @@ export default [
 ];
 ```
 
-如果你只用 js，这样其实就够了。加上 ts 的话，需要如下配置：
+如果你只用 js，这样其实就完成了基本配置了，你需要什么就加什么。比如eslint9默认的cli会配置这两个包的json：
+``` js
+import globals from 'globals'
+import pluginJs from '@eslint/js'
+
+export default [
+  {languageOptions: { globals: globals.browser }},
+  pluginJs.configs.recommended,
+  {
+    plugins: {
+      '@stylistic': stylistic
+    },
+    rules: {
+      semi: ["error", "never"],
+    }
+  }
+]
+```
+如上，这里是[globals的配置数据](https://github.com/sindresorhus/globals/blob/main/globals.json)和[@eslint/js的配置数据](https://github1s.com/eslint/eslint/blob/main/packages/js/src/configs/eslint-recommended.js)可供参考。
+
+加上 ts 的话，需要如下配置：
 
 ```js
 import tseslint from "typescript-eslint";
@@ -62,9 +82,9 @@ export default [
 ];
 ```
 
-如上，用扩展运算符带入进去。注意了，v9 没有 extends 关键字了，只能这样引入。你不要相信目前很多网上的文档，那些都是 v8 的操作，如上的写法是 eslint 官方推荐的。
+如上，用扩展运算符带入进去。注意了，v9 没有 extends 关键字，只能这样引入。你不要相信目前很多网上的文档，那些都是 v8 的操作，如上的写法是 eslint 官方推荐的。
 
-再来，前面提到，从 v8.53.0 开始，弃用了很多空格相关的规则。什么是空格相关的规则？举个例子：
+再来，前面提到，从 v8.53.0 开始，eslint官方待弃用了很多空格相关的规则。什么是空格相关的规则？举个例子：
 
 ```js
 // 错误的：
@@ -84,9 +104,7 @@ const obj = {
 - "a: 空格空格空格 1" 属于 key-spacing 的错误；
 - "obj =空格空格空格{" 属于 no-multi-spaces 的错误；
 
-eslint 官方其实不再希望我们使用 eslint 作为源码格式化的工具。可如果我们就是想用呢？参考[Why I don't use Prettier](https://antfu.me/posts/why-not-prettier)这篇文章，我是非常赞同的。
-
-前面说了，可以用`@stylistic/eslint-plugin`这个库继续使用这些跟空格相关的规则。多说一句，这个库就是 antfu 大佬自己主动承接下来的，eslint 官方说弃用这些，antfu 就说：那交给我来维护吧，于是就有了[eslint.style](https://eslint.style/)
+eslint 官方其实不再希望我们使用 eslint 作为源码格式化的工具。可如果我们就是想用呢？参考[Why I don't use Prettier](https://antfu.me/posts/why-not-prettier)这篇文章，我是非常赞同的。我们可以用`@stylistic/eslint-plugin`这个库来继续使用这些跟空格相关的规则。多说一句，这个库就是 antfu 大佬自己主动承接下来的，eslint 官方说弃用这些规则后，antfu 就说：那交给我来维护吧，于是就有了[eslint.style](https://eslint.style/)这个库。
 
 该库的配置如下：
 
@@ -114,4 +132,4 @@ export default [
 
 如上，在原有的规则名上加入"@stylistic/"即可。
 
-当然了，目前商业项目不是很推荐立马使用 v9，起码等周边生态库全部摆脱 beta 版本后，再考虑上 v9 吧~
+当然了，目前生产环境不是很推荐立马使用 v9，起码等周边生态库全部摆脱 beta 版本后，再考虑上 v9 吧，如果是个人项目就随便折腾了~
