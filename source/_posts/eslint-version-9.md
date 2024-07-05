@@ -1,6 +1,6 @@
 ---
-title: eslint9.x尝鲜
-excerpt: 2024年eslint发布了v9.x，不少feature
+title: eslint9.x体验
+excerpt: 2024年4月初，eslint发布了v9.x，来看看有什么新特性吧
 date: 2024-07-04 23:44:13
 tags: 综合
 categories: 前端
