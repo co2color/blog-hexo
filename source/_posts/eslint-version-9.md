@@ -1,12 +1,12 @@
 ---
 title: eslint9.x体验
-excerpt: 2024年4月初，eslint发布了v9.x，来看看有什么新特性吧
+excerpt: eslint9 + ts + stylistic
 date: 2024-07-04 23:44:13
 tags: 综合
 categories: 前端
 ---
 
-首先说2个点：
+首先说 2 个点：
 
 - eslint9 弃用 eslintrc 文件，使用 eslint.config.(m/c)js 替代;
 
@@ -33,7 +33,7 @@ categories: 前端
 export default [];
 ```
 
-可以看出，v9.x 导出了一个数组，因此如果是 monorepo，有几个子项目就可以在这里配置几个对象，根据 files 规则去匹配对应的项目用，这个查文档即可，不多废话（这是其中一个原因，不代表多个obj只能是多个项目）
+可以看出，v9.x 导出了一个数组，因此如果是 monorepo，有几个子项目就可以在这里配置几个对象，根据 files 规则去匹配对应的项目用，这个查文档即可，不多废话（这是其中一个原因，不代表多个 obj 只能是多个项目）
 
 首先，不考虑 ts 项目的情况下，最简单的配置：
 
@@ -47,25 +47,27 @@ export default [
 ];
 ```
 
-如果你只用 js，这样其实就完成了基本配置了，你需要什么就加什么。比如eslint9默认的cli会配置这两个包的json：
-``` js
-import globals from 'globals'
-import pluginJs from '@eslint/js'
+如果你只用 js，这样其实就完成了基本配置了，你需要什么就加什么。比如 eslint9 默认的 cli 会配置这两个包的 json：
+
+```js
+import globals from "globals";
+import pluginJs from "@eslint/js";
 
 export default [
-  {languageOptions: { globals: globals.browser }},
+  { languageOptions: { globals: globals.browser } },
   pluginJs.configs.recommended,
   {
     plugins: {
-      '@stylistic': stylistic
+      "@stylistic": stylistic,
     },
     rules: {
       semi: ["error", "never"],
-    }
-  }
-]
+    },
+  },
+];
 ```
-如上，这里是[globals的配置数据](https://github.com/sindresorhus/globals/blob/main/globals.json)和[@eslint/js的配置数据](https://github1s.com/eslint/eslint/blob/main/packages/js/src/configs/eslint-recommended.js)可供参考。
+
+如上，这里是[globals 的配置数据](https://github.com/sindresorhus/globals/blob/main/globals.json)和[@eslint/js 的配置数据](https://github1s.com/eslint/eslint/blob/main/packages/js/src/configs/eslint-recommended.js)可供参考。
 
 加上 ts 的话，需要如下配置：
 
@@ -84,7 +86,7 @@ export default [
 
 如上，用扩展运算符带入进去。注意了，v9 没有 extends 关键字，只能这样引入。你不要相信目前很多网上的文档，那些都是 v8 的操作，如上的写法是 eslint 官方推荐的。
 
-再来，前面提到，从 v8.53.0 开始，eslint官方待弃用了很多空格相关的规则。什么是空格相关的规则？举个例子：
+再来，前面提到，从 v8.53.0 开始，eslint 官方待弃用了很多空格相关的规则。什么是空格相关的规则？举个例子：
 
 ```js
 // 错误的：
