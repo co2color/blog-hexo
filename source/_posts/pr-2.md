@@ -118,7 +118,7 @@ constructor(
   我们来找到我们最上面例子中漏掉的参数previous：
   从/packages/reactivity/src/computed.ts的computed函数可以看到，传入进来的callback的参数名字叫做getterOrOptions; 其次被isFunction(getterOrOptions)执行后，我们的callback变成了getter，最终传给ComputedRefImpl，所以ComputedRefImpl的构造函数的第一个参数fn就是我们的callback函数。
 
-  那么我们就应该来找合适执行我们传入的callback（fn）的：
+  那么我们就应该找到是什么时候执行我们传入的callback（fn）的：
   从refreshComputed函数中可以看到有.fn的影子，但我们看v3.5.0的代码，函数是这样的：
   ``` js
    try {
