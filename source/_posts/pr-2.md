@@ -1,5 +1,5 @@
 ---
-title: github pr解读（二）vue3 v3.5.0 computed参数的oldvalue失效bug
+title: vue3 v3.5.0 computed参数的oldvalue失效bug
 excerpt: 通过pr学习源码（2）
 date: 2024-09-12 22:12:43
 tags: 综合
