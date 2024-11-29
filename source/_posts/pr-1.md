@@ -1,6 +1,6 @@
 ---
-title: github pr解读（一）
-excerpt: vue3 v3.4.24 使用 transition + keep-alive 导致的 bug
+title: vue3 v3.4.24 使用 transition + keep-alive 导致的 bug
+excerpt: 通过pr学习源码（1）
 date: 2024-06-25 21:30:41
 tags: 综合
 categories: 综合
