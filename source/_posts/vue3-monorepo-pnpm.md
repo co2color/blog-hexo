@@ -1,11 +1,11 @@
 ---
-title: 一个vue3的monorepo demo
-excerpt: vue3+pnpm monorepo多项目管理
+title: pnpm实现monorepo多库管理
+excerpt: ppnm monorepo
 date: 2022-7-4 23:50:03
 tags: js
 categories: 前端
 ---
-# vue3-pnpm-monorepo-demo
+# pnpm-monorepo
 
 ## 简介：
 
