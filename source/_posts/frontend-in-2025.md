@@ -34,10 +34,11 @@ categories: 综合
 
 - **现状**：`script setup` 早就一统江湖了，Options API 那是上个世纪的事。
 - **UI 库**：Element Plus 和 Ant Design Vue 依然坚挺，Arco Design 也还行。
-- **年度瓜**：今年最魔幻的事莫过于 **Vercel 收购了 Nuxt**。
-  - 刚听到消息时我下巴都掉了。但仔细想想，Vercel 这一手是要通吃啊，Next.js 还没玩够，要把 Vue 的 SSR 也收入囊中。资本的世界，我们不懂。
+- **年度大事件**：本年发生了一件很...的事情：**Vercel 把 Nuxt 收购了**。
 
-**PS**：Vue 3.6 说要全量改用 `Vapor Mode`，尤大搞快点，隔壁 SolidJS 都嘲讽咱们好几年了
+  虽然令人惊讶，但我个人认为 Nuxt 之后会有更雄厚的资金支持，是好事吧。如果Vercel 的野心是打造全平台生态，而不单单只是 Next.js，那么对Vue生态肯定是利好的。
+
+**PS**：Vue 3.6 说要全量改用 `Vapor Mode`，尤大加油，隔壁 SolidJS 都嘲讽咱们好几年了。
 
 #### React 生态
 
@@ -49,7 +50,7 @@ categories: 综合
 
 ---
 
-### ⚡️ 构建工具：诸神黄昏
+### ⚡️ 构建工具：前端娱乐圈的爱恨情仇
 
 前端之所以被叫“娱乐圈”，这堆构建工具功不可没。
 
