@@ -179,12 +179,11 @@ navbar:
   # Navigation bar menu.
   menu:
     Home: /
-    Archives: /archives/
-    Categories: /categories/
-    Tags: /tags/
+    # Archives: /archives/
+    # Categories: /categories/
+    # Tags: /tags/
+    关于我: /about/
     Github: https://github.com/co2color
-    # 友链: /links/
-    # 关于: /about/
     # ...
 
 #---------------------------
