@@ -9,8 +9,8 @@ categories: 综合
 > 这篇不知道会不会有什么风险，所以如果不懂标题是什么东西的人，还是别看了.....
 
 你需要的东西
-1. [clash](https://github.com/Dreamacro/clash)
-2. 一个vp埃斯和一个属于你的域名；
+1. clash或类似的工具
+2. 一个vp埃斯和一个属于你的域名(可选，但有域名更安全吧)；
 
 ssl连接服务器后，输入脚本：
 ``` sh
@@ -48,7 +48,20 @@ trojan；
 
 然后就是去clash，找到profiles-import-导入该文件，选择该config，然后就可以用了~
 
-另附trojan的脚本：
+
+以下是其他脚本：
+
+- trojan的脚本：
 ``` sh
 bash <(curl -sL https://raw.githubusercontent.com/daveleung/hijkpw-scripts-mod/main/trojan_mod1.sh)
+```
+
+- vless不需要域名的脚本：
+``` sh
+wget -P /root -N --no-check-certificate "https://raw.githubusercontent.com/mack-a/v2ray-agent/master/install.sh" && chmod 700 /root/install.sh && /root/install.sh
+```
+
+- x-ui，我个人没成功过
+``` sh
+bash <(curl -Ls https://raw.githubusercontent.com/FranzKafkaYu/x-ui/master/install.sh)
 ```
